@@ -1902,6 +1902,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   void _showFoodDetailSheet(FoodItem food) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       backgroundColor: const Color(0xFF0E0E0E),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
@@ -1910,12 +1911,14 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         final timeStr =
             '${food.timestamp.hour.toString().padLeft(2, '0')}:${food.timestamp.minute.toString().padLeft(2, '0')}';
 
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(22, 18, 22, 32),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        return SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(22, 18, 22, 32),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -2074,7 +2077,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
               ),
             ],
           ),
-        );
+        ),
+      ),
+    );
       },
     );
   }
